@@ -1,0 +1,63 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: Arial;
+    margin :0 px ;
+    padding :0 px ;
+  }
+  
+  .calculation{
+    font-size : 45px ;
+    margin-top : 15px ;
+    margin-bottom : 5px ;
+  }
+  .row1{
+    margin-bottom :10 px; 
+  }
+  .row2{
+    margin-bottom : 10 px;
+  }
+  .row3{
+    margin-bottom : 10 px;
+  }
+  .row4{
+    margin-bottom : 10 px;
+  }
+  .grey{
+    color : white;
+    background-color : grey;
+    border : solid;
+    height : 60px ;
+    width  : 60px ;
+    margin-right : 10px ;
+    border-radius : 25px ;
+    border : none ;
+    font-size : 25px ;
+    
+  
+  }
+  .clear {
+    color : white;
+    background-color : grey;
+    border : solid;
+    height : 60px ;
+    width  : 60px ;
+    margin-right : 10px ;
+    border-radius : 25px ;
+    border : none ;
+    font-size : 20px ;
+  
+  }
+  
+  .orange{
+    color : white;
+    background-color : orange;
+    border : solid;
+    height : 60px ;
+    width  : 60px ;
+    margin-right : 10px ;
+    border-radius : 25px ;
+    border : none ;
+    font-size : 25px ;
+  
+  }
