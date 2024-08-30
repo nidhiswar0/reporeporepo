@@ -19,7 +19,7 @@ body {
     padding: 25px;
     border-radius: 2500px;
 }
-.reset-score-button {
+.reset-score-button,.autoplay {
     background-color: white;
     border: none;
     font-size: 15px;
@@ -35,3 +35,4 @@ body {
 .moves-element {
     margin-bottom: 50px;
 }
+
