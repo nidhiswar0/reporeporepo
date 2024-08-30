@@ -4,61 +4,73 @@ let score = JSON.parse(localStorage.getItem('score')) || {
     Ties: 0
   };
 
-  function updateScoreBoard() {
-    document.querySelector('.jsscore').innerHTML = `Wins ${score.Wins}, Losses ${score.Losses} , Ties ${score.Ties}`
+function updateScoreBoard() {
+  document.querySelector('.jsscore').innerHTML = `Wins ${score.Wins}, Losses ${score.Losses} , Ties ${score.Ties}`
+}
+
+function playerSelector(select) {
+  const compChoice = computerMoveFunction();
+  let Result = ''
+
+  if (select === 'Rock') {
+    if (compChoice === 'Rock') {Result = "Tie"}
+    else if (compChoice === 'Paper') {Result = "You Lose"}
+    else if (compChoice === 'Scissor') {Result = "You Win"};
   }
 
-  function playerSelector(select) {
-    const compChoice = computerMoveFunction();
-    let Result = ''
+  else if (select === 'Paper') {
+    if (compChoice === 'Rock') {Result = "You Win"}
+    else if (compChoice === 'Paper') {Result = "Tie"}
+    else if (compChoice === 'Scissor') {Result = "You Lose"}
+  }
 
-    if (select === 'Rock') {
-      if (compChoice === 'Rock') {Result = "Tie"}
-      else if (compChoice === 'Paper') {Result = "You Lose"}
-      else if (compChoice === 'Scissor') {Result = "You Win"};
-    }
+  else if (select === 'Scissor') {
+    if (compChoice === 'Rock') {Result = "You Lose"}
+    else if (compChoice === 'Paper') {Result = "You Win"}
+    else if (compChoice === 'Scissor') {Result = "Tie"};
+  }
 
-    else if (select === 'Paper') {
-      if (compChoice === 'Rock') {Result = "You Win"}
-      else if (compChoice === 'Paper') {Result = "Tie"}
-      else if (compChoice === 'Scissor') {Result = "You Lose"}
-    }
+  if (Result === "You Win") {score.Wins++}
+  else if (Result === "You Lose") {score.Losses++}
+  else if (Result === "Tie") {score.Ties++}
 
-    else if (select === 'Scissor') {
-      if (compChoice === 'Rock') {Result = "You Lose"}
-      else if (compChoice === 'Paper') {Result = "You Win"}
-      else if (compChoice === 'Scissor') {Result = "Tie"};
-    }
+  localStorage.setItem('score', JSON.stringify(score));
 
-    if (Result === "You Win") {score.Wins++}
-    else if (Result === "You Lose") {score.Losses++}
-    else if (Result === "Tie") {score.Ties++}
+  updateScoreBoard();
 
-    localStorage.setItem('score', JSON.stringify(score));
+  document.querySelector('.js-moves').innerHTML = 
+  `You ${select}
+  <img class="move-icon" src="${select}-emoji.png">
+  <img class="move-icon" src="${compChoice}-emoji.png">
+  Computer${compChoice} `
 
-    updateScoreBoard();
-
-    document.querySelector('.js-moves').innerHTML = 
-    `You ${select}
-    <img class="move-icon" src="${select}-emoji.png">
-    <img class="move-icon" src="${compChoice}-emoji.png">
-    Computer${compChoice} `
-
-    document.querySelector('.js-result').innerHTML = `${Result}`
-
-
+  document.querySelector('.js-result').innerHTML = `${Result}`
 /*
-    alert(`You Picked ${select}. Computer Picked ${compChoice}. ${Result}
+  alert(`You Picked ${select}. Computer Picked ${compChoice}. ${Result}
 Wins: ${score.Wins} , Losses: ${score.Losses} , Ties: ${score.Ties}`);
 */
+}
+let autoplaystatus = false
+let IntervalID;
+function autoplay(){
+  if(autoplaystatus===false){
+    autoplaystatus=true;
+    IntervalID = setInterval(function(){
+      const comp1Move = computerMoveFunction();
+      playerSelector(comp1Move);} , 1000);
   }
+  else if (autoplaystatus===true){
+    autoplaystatus=false;
+    clearInterval(IntervalID);
+  }  
+}
 
-  function computerMoveFunction() {
-    const randomNumber = Math.random();
-    let computerMove = ''
+function computerMoveFunction() {
+  const randomNumber = Math.random();
+  let computerMove = ''
 
-    if (randomNumber < 1 / 3) {computerMove = 'Rock'}
-    else if (randomNumber > 1 / 3 && randomNumber < 2 / 3) {computerMove = 'Paper'}
-    else if (randomNumber > 2 / 3) {computerMove = 'Scissor'}
-    return computerMove
-  }
+  if (randomNumber < 1 / 3) {computerMove = 'Rock'}
+  else if (randomNumber > 1 / 3 && randomNumber < 2 / 3) {computerMove = 'Paper'}
+  else if (randomNumber > 2 / 3) {computerMove = 'Scissor'}
+  return computerMove
+}
